@@ -1,1 +1,1 @@
-# coffee-dynamics
+# Coffee Dynamics
