@@ -72,3 +72,8 @@ This part is fairly intuitive. But it still doesn't explain the froth.
 The froth doesn't come after laminarization. It comes alongside it, and it actually helps cause it. As air gets entrained into the liquid during frothing, foam forms at the surface. Foam is not a normal fluid. It behaves somewhere between a liquid and a soft solid, and its effective viscosity is orders of magnitude higher than water. Higher viscosity means lower Re. The foam layer actively suppresses turbulent fluctuations from the top down, while spin-up suppresses them from the bottom up. They meet in the middle. The smooth feeling and the froth appearing are not sequential. They are coupled. The froth is part of what's killing the turbulence, not a consequence of it.
 
 To put it simply: in the early violent turbulent phase, air bubbles are being entrained and immediately destroyed by turbulent eddies. The flow is too chaotic to let stable foam structure form. It's only as turbulence weakens that bubbles survive long enough to organize into foam. And there's the feedback loop, weakening turbulence allows foam to form, and forming foam further weakens turbulence.
+
+
+<p align="center">
+  <img width="800" alt="coffeeflow" src="https://github.com/user-attachments/assets/1a65be02-0737-40b8-b75c-573cdc6d034e" />
+</p>
