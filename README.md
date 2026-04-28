@@ -77,3 +77,33 @@ To put it simply: in the early violent turbulent phase, air bubbles are being en
 <p align="center">
   <img width="800" alt="coffeeflow" src="https://github.com/user-attachments/assets/1a65be02-0737-40b8-b75c-573cdc6d034e" />
 </p>
+
+### Simplifying Navier-Stokes
+
+The Navier-Stokes equations govern this entire problem. They are a set of equations that describe the motion of viscous fluids. A suite of partial differential equations that mathematically balance acceleration against pressure gradients, viscous forces, and body forces. In their Cartesian form, they are expressed as:
+
+$$\rho\left[\frac{\partial u}{\partial t} + u\frac{\partial u}{\partial x} + v\frac{\partial u}{\partial y} + w\frac{\partial u}{\partial z}\right] = -\frac{\partial p}{\partial x} + \mu\left(\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} + \frac{\partial^2 u}{\partial z^2}\right) + \rho g_x$$
+
+$$\rho\left[\frac{\partial v}{\partial t} + u\frac{\partial v}{\partial x} + v\frac{\partial v}{\partial y} + w\frac{\partial v}{\partial z}\right] = -\frac{\partial p}{\partial y} + \mu\left(\frac{\partial^2 v}{\partial x^2} + \frac{\partial^2 v}{\partial y^2} + \frac{\partial^2 v}{\partial z^2}\right) + \rho g_y$$
+
+$$\rho\left[\frac{\partial w}{\partial t} + u\frac{\partial w}{\partial x} + v\frac{\partial w}{\partial y} + w\frac{\partial w}{\partial z}\right] = -\frac{\partial p}{\partial z} + \mu\left(\frac{\partial^2 w}{\partial x^2} + \frac{\partial^2 w}{\partial y^2} + \frac{\partial^2 w}{\partial z^2}\right) + \rho g_z$$
+
+But for this problem our flow is rotational, so we use the cylindrical form of Navier-Stokes, where the dominant motion is azimuthal. The azimuthal component is expressed as:
+
+$$\rho\left(\frac{\partial u_\theta}{\partial t} + u_r\frac{\partial u_\theta}{\partial r} + \frac{u_\theta}{r}\frac{\partial u_\theta}{\partial \theta} + \frac{u_r u_\theta}{r} + u_z\frac{\partial u_\theta}{\partial z}\right) = -\frac{1}{r}\frac{\partial p}{\partial \theta} + \mu\left(\frac{\partial^2 u_\theta}{\partial r^2} + \frac{1}{r}\frac{\partial u_\theta}{\partial r} - \frac{u_\theta}{r^2} + \frac{1}{r^2}\frac{\partial^2 u_\theta}{\partial \theta^2} + \frac{\partial^2 u_\theta}{\partial z^2}\right) + \rho g_\theta$$
+
+This is a nastier form of NS, but one that can be simplified considerably. Thinking of NS as a form of Newton's Second Law (F = ma) makes this process cleaner. The left side contains the inertial forces, the acceleration of the fluid. The right side contains the forces that drive the flow, the pressure gradient, viscous forces, and gravity.
+
+Before simplifying, some assumptions must be made. I plan to work two cases, one where the flow is steady, and one where it is not. Now obviously the whole point of this project is that the flow transitions from turbulent to laminar over about 10 seconds. If we assume steady state, then by definition the flow is already done transitioning. But to solve this differntial equation by hand, the time term has to go. Before the assumptions, a shoutout to the professor who taught me fluid mechanics, [Dr. Nitesh Nama](https://niteshnama.weebly.com/), a brilliant man.
+
+#### Assumptions
+
+| # | Assumption | Consequence |
+|---|---|---|
+| 1 | Newtonian fluid | $\mu$ = constant |
+| 2 | Incompressible | $\rho$ = constant |
+| 3 | Neglect gravity | $g$ = 0 |
+| 4 | Axisymmetric | $\partial/\partial\theta$ = 0 |
+| 5 | 1D flow | $u_z = u_r = 0$, $\partial/\partial z$ = 0 |
+| 6 | No azimuthal pressure gradient | $\partial p/\partial\theta$ = 0 |
+| 7 | Steady flow *(Case 1 only)* | $\partial/\partial t$ = 0 |
