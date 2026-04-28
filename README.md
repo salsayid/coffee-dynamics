@@ -1,6 +1,6 @@
 # Coffee Dynamics
 
-Every single morning without fail, I drink a cup of coffee. Not anyhting fancy. Just Nescafe instant coffee, dry whole milk, and hot water. Very North African style. I've made this exact cup probably a couple thousand times by now, so I know every single step of it by feel. It's all very intuitve to me. I konw the ratio of powder to water, I konw when to stop frothing, I know exactly what it's supposed to look like when it's done. 
+Every single morning without fail, I drink a cup of coffee. Not anyhting fancy. Just [Nescafe](https://www.nescafe.com/us/products/dark-roast-instant-coffee-7-oz-jar/) instant coffee, dry whole milk, and hot water. Very North African style. I've made this exact cup probably a couple thousand times by now, so I know every single step of it by feel. It's all very intuitve to me. I konw the ratio of powder to water, I konw when to stop frothing, I know exactly what it's supposed to look like when it's done. 
 
 But something happens during the frothing step that I've never really stopped to think about until recently. When I first put the frother in and turn it on, the flow is very rough and turbulent, it's chaotic. You can literally feel the resistance in your hand. But after a few seconds, something changes and shifts. The mixutre smoothens out. The resistance changes and it goes from feeling very violent to feeling almost organized. As if this was done by design. 
 
@@ -40,7 +40,7 @@ This is my attempt to answer that question properly. Not just qualitatively, but
 ### How turbulent is this?
 The Reynolds number is the first thing I thought of computing. It is a famous yet relatively simple formula that tells you whether a flow is laminar or turbulent by comparing the inertial forces to the viscous forces. A high Re means inertia dominates (turbulent flow). Low Re means viscosity dominates (laminar flow).
 
-For this particular setup, since our flow is rotational, I used the Rotational Reynolds Number expression defined as:
+For this particular setup, since our flow is rotational, I used the [Rotational Reynolds Number](https://www.sciencedirect.com/topics/engineering/rotational-reynolds-number) expression defined as:
 
 <div align="center">
 
