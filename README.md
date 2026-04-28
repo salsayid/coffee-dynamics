@@ -57,3 +57,18 @@ $$Re = \frac{1257 \cdot 0.0105 \cdot 0.0245}{3.3 \cdot 10^{-7}} \approx 981,000$
 </div>
 
 Pipe flow transistions to turbulence around Re ~ 2,300. This flow is more than 400 times past that. This means that the coffee in my mug every morning is in an extremely violent turbulent state the moment my forther touches it.
+
+### What's actually happening.
+Having established that at its worst, my coffee flows with a Reynolds number of nearly a million (981,000), equivalent to the flow an aircraft wing experiences during flight, the question then begs itself. How does this slow down? Where does the smooth, laminar feeling come from, and where does the froth come in?
+
+My first thought was the dissolving of the dry powder into the water. This made the most sense to me intuitively. Undissolved powder particles increase the effective viscosity of the mixture, and as they dissolve the fluid becomes more homogeneous, less resistive. And while this is definitely a factor, it's not the main one. The frother is spinning at 1,257 rad/s. Even a fairly thick, clumpy mixture would be torn to shreds almost instantly at that shear rate. The dissolving happens in the first half second. The smooth feeling comes around 10 seconds later. Something else is sustaining the turbulence after the clumps are gone.
+
+It's explained by two things happening simultaneously. 
+
+First, the bulk fluid spins up. At t=0 the fluid is basically stationary and the frother disc is screaming at 1,257 rad/s. That enormous velocity difference is what drives the turbulence. As you froth, momentum transfers from the disc to the fluid. The whole liquid mass begins to rotate with the frother. The relative velocity between disc and fluid drops, and Re drops with it, because Re depends on that relative velocity.
+
+This part is fairly intuitive. But it still doesn't explain the froth.
+
+The froth doesn't come after laminarization. It comes alongside it, and it actually helps cause it. As air gets entrained into the liquid during frothing, foam forms at the surface. Foam is not a normal fluid. It behaves somewhere between a liquid and a soft solid, and its effective viscosity is orders of magnitude higher than water. Higher viscosity means lower Re. The foam layer actively suppresses turbulent fluctuations from the top down, while spin-up suppresses them from the bottom up. They meet in the middle. The smooth feeling and the froth appearing are not sequential. They are coupled. The froth is part of what's killing the turbulence, not a consequence of it.
+
+To put it simply: in the early violent turbulent phase, air bubbles are being entrained and immediately destroyed by turbulent eddies. The flow is too chaotic to let stable foam structure form. It's only as turbulence weakens that bubbles survive long enough to organize into foam. And there's the feedback loop, weakening turbulence allows foam to form, and forming foam further weakens turbulence.
