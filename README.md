@@ -56,7 +56,7 @@ $$Re = \frac{1257 \cdot 0.0105 \cdot 0.0245}{3.3 \cdot 10^{-7}} \approx 981,000$
 
 </div>
 
-Pipe flow transistions to turbulence around Re ~ 2,300. This flow is more than 400 times past that. This means that the coffee in my mug every morning is in an extremely violent turbulent state the moment my forther touches it.
+Typical pipe flow transistions to turbulence around Re ~ 2,300. This flow is more than 400 times past that. This means that the coffee in my mug every morning is in an extremely violent turbulent state the moment my frother touches it.
 
 ### What's actually happening.
 Having established that at its worst, my coffee flows with a Reynolds number of nearly a million (981,000), equivalent to the flow an aircraft wing experiences during flight, the question then begs itself. How does this slow down? Where does the smooth, laminar feeling come from, and where does the froth come in?
