@@ -146,3 +146,84 @@ $$\frac{\partial^2 u_\theta}{\partial r^2} + \frac{1}{r}\frac{\partial u_\theta}
 This is the equation that I can actually solve by hand. Its solution is the laminar velocity profile 
 the flow settles into after the transition, the analytical ground truth that the 
 simulation has to match!
+
+### Solving for the Laminar Velocity Profile
+
+The simplified ODE for Case 1 is:
+
+$$\frac{d^2 u_\theta}{dr^2} + \frac{1}{r}\frac{d u_\theta}{dr} - \frac{u_\theta}{r^2} = 0$$
+
+This is an [Cauchy-Euler](https://en.wikipedia.org/wiki/Cauchy%E2%80%93Euler_equation) equation. You assume a solution of the form $u_\theta = r^m$ and substitute in:
+
+$$\frac{du_\theta}{dr} = mr^{m-1}, \qquad \frac{d^2u_\theta}{dr^2} = m(m-1)r^{m-2}$$
+
+Substituting:
+
+$$m(m-1)r^{m-2} + \frac{1}{r}mr^{m-1} - \frac{r^m}{r^2} = 0$$
+
+$$m(m-1)r^{m-2} + mr^{m-2} - r^{m-2} = 0$$
+
+Dividing through by $r^{m-2}$:
+
+$$m(m-1) + m - 1 = 0$$
+
+$$m^2 - 1 = 0$$
+
+$$m = \pm 1$$
+
+Two solutions: $r^{+1}$ and $r^{-1}$. The general solution is a linear combination of both:
+
+$$u_\theta(r) = Ar + \frac{B}{r}$$
+
+#### Boundary Conditions
+
+No-slip at both walls. The fluid at the frother disc moves with the disc, and the fluid 
+at the mug wall is stationary:
+
+$$u_\theta(R_1) = \Omega_1 R_1 \qquad \text{(inner wall, frother disc)}$$
+
+$$u_\theta(R_2) = 0 \qquad \text{(outer wall, mug)}$$
+
+Applying the inner boundary condition:
+
+$$AR_1 + \frac{B}{R_1} = \Omega_1 R_1$$
+
+Applying the outer boundary condition:
+
+$$AR_2 + \frac{B}{R_2} = 0$$
+
+Solving this 2x2 system:
+
+$$A = \frac{-\Omega_1 R_1^2}{R_2^2 - R_1^2}, \qquad B = \frac{\Omega_1 R_1^2 R_2^2}{R_2^2 - R_1^2}$$
+
+So the full laminar velocity profile is:
+
+$$\boxed{u_\theta(r) = \frac{\Omega_1 R_1^2}{R_2^2 - R_1^2}\left(\frac{R_2^2}{r} - r\right)}$$
+
+#### Plugging In Real Numbers
+
+Using the measured dimensions of my mug and frother:
+
+$$R_1 = 0.0105 \text{ m}, \quad R_2 = 0.035 \text{ m}, \quad \Omega_1 = 1257 \text{ rad/s}$$
+
+$$A = \frac{-1257 \times (0.0105)^2}{(0.035)^2 - (0.0105)^2} = \frac{-0.1387}{0.001113} = -124.6 \text{ s}^{-1}$$
+
+$$B = \frac{1257 \times (0.0105)^2 \times (0.035)^2}{(0.035)^2 - (0.0105)^2} = \frac{1.693 \times 10^{-4}}{1.113 \times 10^{-3}} = 0.1521 \text{ m}^2\text{/s}$$
+
+The velocity profile across the gap at steady state is therefore:
+
+$$u_\theta(r) = -124.6r + \frac{0.1521}{r}$$
+
+At the frother disc ($r = R_1 = 0.0105$ m):
+
+$$u_\theta(0.0105) = -124.6(0.0105) + \frac{0.1521}{0.0105} = -1.308 + 14.486 = 13.18 \text{ m/s}$$
+
+Which matches $\Omega_1 R_1 = 1257 \times 0.0105 = 13.20$ m/s. Boundary condition satisfied.
+
+At the mug wall ($r = R_2 = 0.035$ m):
+
+$$u_\theta(0.035) = -124.6(0.035) + \frac{0.1521}{0.035} = -4.361 + 4.346 \approx 0 \text{ m/s}$$
+
+Boundary condition satisfied!!!! This is the exact velocity profile the flow settles 
+into after the turbulent-to-laminar transition. It is the analytical ground truth 
+that the simulation must converge to. Nice :). 
