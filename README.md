@@ -110,3 +110,39 @@ Before simplifying, some assumptions must be made. I plan to work two cases, one
 | 5 | 1D flow | $u_z = u_r = 0$, $\partial/\partial z$ = 0 |
 | 6 | No azimuthal pressure gradient | $\partial p/\partial\theta$ = 0 |
 | 7 | Steady flow *(Case 1 only)* | $\partial/\partial t$ = 0 |
+
+### Simplifying the Azimuthal Equation
+
+Now that the assumptions are defined, it's time to kill off terms.
+
+As I've stated previously, the dominant motion in this problem is azimuthal, so we start by eliminating anything 
+unrelated to that. Gravity acts vertically in the z direction, so by geometry, the 
+gravitational body force in the $\theta$ direction is zero. We are looking at a spinning 
+flow, not a sinking or rising one. This kills $\rho g_\theta$.
+
+The mug is a cylinder and the frother spins at its center. The flow looks identical no 
+matter which radial slice you look at, this is the axisymmetric assumption. Nothing 
+varies as you rotate around the axis, so any derivative with respect to $\theta$ is zero. 
+This kills three more terms.
+
+The fluid isn't moving radially or vertically on average. The dominant motion is purely 
+rotational, and the velocity profile looks the same at every height within the coffee. So 
+the radial and vertical velocities are zero, and all z derivatives are zero. This is the 
+1D assumption, and it kills the most terms.
+
+What we are left with is:
+
+$$\rho \frac{\partial u_\theta}{\partial t} = \mu\left(\frac{\partial^2 u_\theta}{\partial r^2} + \frac{1}{r}\frac{\partial u_\theta}{\partial r} - \frac{u_\theta}{r^2}\right)$$
+
+This is the governing equation for the fluid in the mug. Left side is inertia, the 
+fluid accelerating in the $\theta$ direction over time. Right side is viscosity, the 
+only thing driving that acceleration is the diffusion of momentum radially across the gap.
+
+For Case 1, we apply the steady flow assumption. Nothing is changing in time, so 
+$\partial/\partial t = 0$. The left side dies, the partial differential equation becomes an ordinary differential equation:
+
+$$\frac{\partial^2 u_\theta}{\partial r^2} + \frac{1}{r}\frac{\partial u_\theta}{\partial r} - \frac{u_\theta}{r^2} = 0$$
+
+This is the equation that I can actually solve by hand. Its solution is the laminar velocity profile 
+the flow settles into after the transition, the analytical ground truth that the 
+simulation has to match!
