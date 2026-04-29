@@ -253,4 +253,27 @@ mug. That's no-slip. The curve isn't linear either. That gentle concave decay is
 signature of cylindrical geometry. In flat plate Cartesian flow it would be a straight 
 line. The curvature of the mug is what bends it. Pretty cool when the physics checks out right.
 
+### Visualizing the Transition
 
+The analytical solution gives us $u_\theta(r)$, the azimuthal velocity at every point 
+across the gap. So to make this visible, the velocity field is projected onto a top-down 
+2D cross section of the mug, colored by speed using a sort of inferno colormap. The frother 
+disc sits at the center, and the mug wall is the outer ring.
+
+The spiral structure in the color field rotates at the local angular velocity 
+$\omega(r) = u_\theta(r) / r$ at each radial position. Near the frother disc, $\omega$ 
+is high and the pattern spins fast. Near the mug wall, $\omega \approx 0$ and it barely 
+moves. That differential rotation is exactly what you would see looking straight down 
+into a spinning fluid.
+
+At $t = 0$, the fluid is stationary. The frother disc instantly spins up to 
+$\Omega_1 R_1 = 13.2$ m/s and momentum begins diffusing outward across the gap. 
+The bright ring bleeds outward frame by frame until the gap fills with the smooth 
+laminar profile derived earlier.
+
+<p align="center">
+  <img src="figures/transition_animation.gif" width="600"/>
+</p>
+
+The color scale runs from black (zero velocity) through purple, orange, and white 
+(13.2 m/s at the disc).
