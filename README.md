@@ -227,3 +227,25 @@ $$u_\theta(0.035) = -124.6(0.035) + \frac{0.1521}{0.035} = -4.361 + 4.346 \appro
 Boundary condition satisfied!!!! This is the exact velocity profile the flow settles 
 into after the turbulent-to-laminar transition. It is the analytical ground truth 
 that the simulation must converge to. Nice :). 
+
+With this analytical solution in mind, plotting it is very straightforward:
+
+```python
+A = (-Omega1 * R1**2) / (R2**2 - R1**2)
+B = (Omega1 * R1**2 * R2**2) / (R2**2 - R1**2)
+
+r = np.linspace(R1, R2, 500)
+u = A * r + B / r
+```
+
+
+![Laminar Velocity Profile](figures/laminar_profile.png)
+
+At $r = R_1 = 10.5$ mm, the fluid moves at 13.2 m/s glued to the frother disc, 
+spinning with it. Moving radially outward toward the mug wall, the velocity drops off. 
+At $r = R_2 = 35$ mm it hits zero, the fluid at the wall is stationary, stuck to the 
+mug. That's no-slip. The curve isn't linear either. That gentle concave decay is the 
+signature of cylindrical geometry. In flat plate Cartesian flow it would be a straight 
+line. The curvature of the mug is what bends it. Pretty cool when the physics checks out right.
+
+
