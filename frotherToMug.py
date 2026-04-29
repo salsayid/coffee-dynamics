@@ -31,13 +31,13 @@ ax.axvline(R2 * 1000, color='gray', linewidth=0.8, linestyle=':', label='Mug wal
 ax.annotate('Frother disc\n$u_\\theta = \\Omega_1 R_1 = 13.2$ m/s',
             xy=(R1 * 1000, Omega1 * R1),
             xytext=(14, 10),
-            arrowprops=dict(arrowstyle='->', color='black'),
+            arrowprops=dict(arrowstyle='->', color='red'),
             fontsize=9)
 
 ax.annotate('Mug wall\n$u_\\theta = 0$',
             xy=(R2 * 1000, 0),
             xytext=(28, 2),
-            arrowprops=dict(arrowstyle='->', color='black'),
+            arrowprops=dict(arrowstyle='->', color='red'),
             fontsize=9)
 
 ax.legend(fontsize=9)
