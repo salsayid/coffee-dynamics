@@ -16,6 +16,9 @@ This is my attempt to answer that question properly. Not just qualitatively, but
 | Total height | -- | 0.105 m |
 | Liquid depth during frothing | H | 0.04 m |
 
+<img width="300" height="300" alt="mugdimen2" src="https://github.com/user-attachments/assets/2800a922-9245-4265-93f2-65ea8b7e46d2" />
+
+
 <br>
 
 ### My Frother
