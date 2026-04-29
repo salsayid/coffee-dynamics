@@ -231,6 +231,10 @@ that the simulation must converge to. Nice :).
 With this analytical solution in mind, plotting it is very straightforward:
 
 ```python
+R1 = 0.0105       # frother disc radius - m
+R2 = 0.035        # mug inner radius - m
+Omega1 = 1257     # angular velocity - rad/s
+
 A = (-Omega1 * R1**2) / (R2**2 - R1**2)
 B = (Omega1 * R1**2 * R2**2) / (R2**2 - R1**2)
 
@@ -238,9 +242,9 @@ r = np.linspace(R1, R2, 500)
 u = A * r + B / r
 ```
 
-
-![Laminar Velocity Profile](figures/laminar_profile.png)
-
+<p align="center">
+  <img width="632" height="392" alt="laminar_profile (1)" src="https://github.com/user-attachments/assets/f0fb27b0-3284-40bf-a2fa-28e780357437" />
+</p>
 At $r = R_1 = 10.5$ mm, the fluid moves at 13.2 m/s glued to the frother disc, 
 spinning with it. Moving radially outward toward the mug wall, the velocity drops off. 
 At $r = R_2 = 35$ mm it hits zero, the fluid at the wall is stationary, stuck to the 
