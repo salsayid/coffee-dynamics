@@ -6,6 +6,12 @@ But something happens during the frothing step that I've never really stopped to
 
 This is my attempt to answer that question properly. Not just qualitatively, but mechanistically. The geometry here will be my actual mug. The goal is to model the transition from turbulent to laminar flow in a cup of cofee, and to understand every step of that model. 
 
+> [!NOTE]
+> This project is still a work in progress and serves as an early draft of what I hope will become a much more extensive study. So, pls excuse any spelling, grammar, or formatting mistakes (there are a ton).
+>
+> Through my undergrad research involvement with the [Park Research Group](https://mmfd.unl.edu/), I have access to high-performance computing (HPC) clusters for CFD. My long-term goal is to simulate this problem using [OpenFOAM](https://www.openfoam.com/) and compare the numerical results with the analytical model. ANd, I think it will look very cool to see my Nescafe in simulation. 
+
+
 <br> 
 
 ### My Mug
