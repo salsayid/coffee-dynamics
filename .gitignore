@@ -1,0 +1,21 @@
+__pycache__/
+*.pyc
+
+# meshes and raw solver output
+cfd/mesh/**/*.nas
+cfd/mesh/**/*.ansa
+cfd/mesh/**/*.crd
+cfd/mesh/**/*.cnn
+cfd/mesh/**/*.ebc
+cfd/mesh/**/*.srf
+cfd/cases/**/ACUSIM.DIR/
+cfd/cases/**/*.Log
+cfd/cases/**/*.log
+cfd/cases/**/MESH.DIR/
+cfd/cases/**/ensight/
+cfd/cases/**/processor*/
+cfd/cases/**/postProcessing/
+cfd/cases/**/[0-9]*.[0-9]*/
+cfd/cases/**/polyMesh/
+cfd/post/raw/
+cfd/scratch/
