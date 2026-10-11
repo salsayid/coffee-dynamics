@@ -39,3 +39,5 @@ ANSA_Input.log
 *.ansa
 META_post*.log
 META_post*.ses
+cfd/post/meta_dbg_*.png
+cfd/post/meta_test_*.png
