@@ -17,10 +17,13 @@ This is my attempt to answer that question properly. Not just qualitatively, but
 ### My Mug
 | Parameter |Symbol | Value |
 | -------- | -------- | -------- |
-| Inner Radius | R<sub>2 | 0.035 m |
+| Inner Radius (at the rim) | R<sub>2</sub> | 0.035 m |
+| Inner Radius (at the bottom, estimated) | -- | 0.030 m |
 | Outer Radius | -- | 0.0425 m |
 | Total height | -- | 0.105 m |
 | Liquid depth during frothing | H | 0.04 m |
+
+The inside of the mug tapers: it widens smoothly from the bottom to the rim. The hand derivation below uses the rim radius as if the walls were straight; the CFD sections later use the real taper.
 
 <img width="300" height="300" alt="mugdimen2" src="https://github.com/user-attachments/assets/2800a922-9245-4265-93f2-65ea8b7e46d2" />
 
@@ -31,18 +34,17 @@ This is my attempt to answer that question properly. Not just qualitatively, but
 ##### https://www.amazon.com/CIRCLE-JOY-Rechargeable-Cappuccino-Chocolate/dp/B0FT3VTD72?th=1
 | Parameter |Symbol | Value |
 | -------- | -------- | -------- |
-| Disc Radius | R<sub>1 | 0.0105 m |
+| Disc Radius | R<sub>1</sub> | 0.0105 m |
 | Speed setting used | -- | Mid (12,000 RPM) |
-| Angular velocity | $\Omega$<sub>1 | 1,257 rad/s |
-| Liquid depth during frothing | H | 0.04 m |
+| Angular velocity | $\Omega$<sub>1</sub> | 1,257 rad/s |
 
 <br>
 
 ### Misc. Geometry
 | Parameter |Symbol | Value |
 | -------- | -------- | -------- |
-| Gap width | d = R<sub>2 - R<sub>1 | 0.0245 m |
-| Outer Radius | $\eta = \frac{R_2}{R_1}$ | 0.30 m |
+| Gap width | d = R<sub>2</sub> - R<sub>1</sub> | 0.0245 m |
+| Radius ratio | $\eta = \frac{R_1}{R_2}$ | 0.30 |
 
 <br>
 
@@ -212,23 +214,23 @@ Using the measured dimensions of my mug and frother:
 
 $$R_1 = 0.0105 \text{ m}, \quad R_2 = 0.035 \text{ m}, \quad \Omega_1 = 1257 \text{ rad/s}$$
 
-$$A = \frac{-1257 \times (0.0105)^2}{(0.035)^2 - (0.0105)^2} = \frac{-0.1387}{0.001113} = -124.6 \text{ s}^{-1}$$
+$$A = \frac{-1257 \times (0.0105)^2}{(0.035)^2 - (0.0105)^2} = \frac{-0.1386}{0.001115} = -124.3 \text{ s}^{-1}$$
 
-$$B = \frac{1257 \times (0.0105)^2 \times (0.035)^2}{(0.035)^2 - (0.0105)^2} = \frac{1.693 \times 10^{-4}}{1.113 \times 10^{-3}} = 0.1521 \text{ m}^2\text{/s}$$
+$$B = \frac{1257 \times (0.0105)^2 \times (0.035)^2}{(0.035)^2 - (0.0105)^2} = \frac{1.698 \times 10^{-4}}{1.115 \times 10^{-3}} = 0.1523 \text{ m}^2\text{/s}$$
 
 The velocity profile across the gap at steady state is therefore:
 
-$$u_\theta(r) = -124.6r + \frac{0.1521}{r}$$
+$$u_\theta(r) = -124.3r + \frac{0.1523}{r}$$
 
 At the frother disc ($r = R_1 = 0.0105$ m):
 
-$$u_\theta(0.0105) = -124.6(0.0105) + \frac{0.1521}{0.0105} = -1.308 + 14.486 = 13.18 \text{ m/s}$$
+$$u_\theta(0.0105) = -124.3(0.0105) + \frac{0.1523}{0.0105} = -1.305 + 14.505 = 13.20 \text{ m/s}$$
 
 Which matches $\Omega_1 R_1 = 1257 \times 0.0105 = 13.20$ m/s. Boundary condition satisfied.
 
 At the mug wall ($r = R_2 = 0.035$ m):
 
-$$u_\theta(0.035) = -124.6(0.035) + \frac{0.1521}{0.035} = -4.361 + 4.346 \approx 0 \text{ m/s}$$
+$$u_\theta(0.035) = -124.3(0.035) + \frac{0.1523}{0.035} = -4.351 + 4.351 \approx 0 \text{ m/s}$$
 
 Boundary condition satisfied!!!! This is the exact velocity profile the flow settles 
 into after the turbulent-to-laminar transition. It is the analytical ground truth 
@@ -283,3 +285,5 @@ laminar profile derived earlier.
 
 The color scale runs from black (zero velocity) through purple, orange, and white 
 (13.2 m/s at the disc).
+
+One honest caveat about this animation: to make the momentum spread in a watchable amount of time, `transition_animation.py` uses a viscosity of 0.01 m²/s, about 30,000 times that of real hot water. With the real viscosity, pure viscous diffusion across the gap would take roughly $d^2/\nu \approx 30$ minutes, so the time label is not physical time. The CFD sections below use the real properties.
