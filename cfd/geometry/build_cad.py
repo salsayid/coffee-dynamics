@@ -170,10 +170,11 @@ def mesh_surfaces(groups, vols, out_dir, name, variant, h_head=None, h_max=1.5, 
     head = groups["frother_head"] + groups.get("shaft_rotor", [])
     if h_head is None:
         h_head = 0.18 if variant == "A" else 0.12
-    h_min = 0.06 if variant == "B" else min(0.12, h_head)
+    h_min = min(0.12, h_head)
     gmsh.option.setNumber("Mesh.MeshSizeMin", h_min)
     gmsh.option.setNumber("Mesh.MeshSizeMax", h_max)
-    gmsh.option.setNumber("Mesh.MeshSizeFromCurvature", 24)
+    # 12 elements around the 0.4 mm coil wire keeps Variant B near 2-3M cells
+    gmsh.option.setNumber("Mesh.MeshSizeFromCurvature", 12 if variant == "B" else 24)
     gmsh.option.setNumber("Mesh.MeshSizeExtendFromBoundary", 1)
     gmsh.option.setNumber("Mesh.Algorithm", 6)
     f = gmsh.model.mesh.field

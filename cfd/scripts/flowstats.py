@@ -13,8 +13,8 @@ sys.path.insert(0, os.path.join(HERE, "..", "geometry"))
 import acu  # noqa: E402
 import params as P  # noqa: E402
 
-ROTATING = ("frother_head", "shaft_rotor", "shaft_stator")
-FIXED = ("mug_wall", "mug_bottom")
+ROTATING = ("frother_head", "shaft_rotor", "shaft_stator", "torus", "shaft", "hub")
+FIXED = ("mug_wall", "mug_bottom", "bottom")
 
 
 def surface_names(case):
@@ -55,6 +55,8 @@ class Mesh:
                 tets = [(0, 1, 2, 3)]
             elif s["shape"] == "six_node_wedge":
                 tets = [(0, 1, 2, 3), (1, 2, 3, 4), (2, 3, 4, 5)]
+            elif s["shape"] == "eight_node_brick":
+                tets = [(0, 1, 3, 4), (1, 2, 3, 6), (1, 4, 5, 6), (3, 4, 6, 7), (1, 3, 4, 6)]
             else:
                 tets = [(0, 1, 2, 4), (0, 2, 3, 4)]
             ev = np.zeros(len(c))
@@ -69,6 +71,18 @@ class Mesh:
         self.r = np.hypot(self.xyz[:, 0], self.xyz[:, 1])
         self.th = np.arctan2(self.xyz[:, 1], self.xyz[:, 0])
         self.z = self.xyz[:, 2]
+
+
+def nodal_series(case, var="velocity", every=50, last=None):
+    """Export every `every`-th nodal output step; returns {step: values}."""
+    for f in glob.glob(os.path.join(case, "case_step*.out")):
+        os.remove(f)
+    acu.trans(case, "-out", "-to", "table", "-outv", var, "-ts", f"0:{last or 10**7}:{every}", "-imts")
+    out = {}
+    for f in glob.glob(os.path.join(case, "case_step*.out")):
+        step = int(re.findall(r"step(\d+)", f)[0])
+        out[step] = np.loadtxt(f)
+    return dict(sorted(out.items()))
 
 
 def swirl_stats(mesh, vel, omega=P.OMEGA, liquid=None):
