@@ -179,7 +179,7 @@ def main():
         for row in elems.get(etype, []):
             pid = row[1]
             bc = pid_name.get(pid, f"pid{pid}")
-            if bc.startswith("mrf_"):
+            if bc.startswith("mrf_") or bc == "liquid_level":
                 continue
             nodes = idx[np.array(row[2:])].tolist()
             key = sorted(nodes)

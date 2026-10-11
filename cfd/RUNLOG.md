@@ -61,3 +61,37 @@ Final pipeline: gmsh/OpenCASCADE CAD and surface mesh (named groups) → ANSA ba
 | m1 | 0.18 mm | 1.45M | 396k |
 
 A 1-thread check run of m1 reads cleanly; about 3 minutes per steady iteration on 1 thread.
+
+## Sat evening: Taylor sweep results, compute problems, and a change of approach
+
+### Taylor sweep (done)
+
+| Re | Growth rate, AcuSolve | Growth rate, linear theory | Saturated strength u_r/U |
+|---|---|---|---|
+| 60 | -0.035 | -0.083 | decays (fit skewed by noise floor) |
+| 70 | -0.0165 | -0.0175 | decays |
+| 76 | +0.0118 | +0.0140 | 0.033 |
+| 80 | +0.0303 | +0.0325 | 0.052 |
+| 150 | +0.2011 | +0.2037 | 0.123 |
+| 300 | +0.305 | +0.312 | stopped early |
+| 600 | +0.367 | +0.374 | stopped early |
+
+Extrapolating strength squared to zero from Re = 76 and 80 gives **Re_c = 73.25 vs 73.22 from theory**.
+
+### Why runs were slow, and the fix
+
+- AcuSolve runs pin their OpenMP threads to the first cores by default, so concurrent jobs piled onto the same 4-8 cores while total CPU stayed at 11-15%. Explicit, non-overlapping `KMP_AFFINITY` core lists fixed it (axisymmetric startup went from 13.5 s to 2.2 s per step).
+- **Core limit:** at times more than 16 solver threads were allocated, but measured machine CPU stayed between 11% and 34% (well under 16 cores' worth, i.e. 32 logical processors). From 18:20 on, allocation is held at 16 threads (8 + 4 + 4).
+- The level-set auto strategy ran 20 mostly serial redistancing passes per step (31 s/step); capping it at 2-4 passes gives 5.7 s/step.
+
+### Change of approach for the transient runs
+
+The full 3D startup on the coarse 505k-cell mesh cost 66 s per time step (about 37 hours for 10 s). Because the torus head is axisymmetric apart from three thin spokes, the startup (Level 2b) and free surface (Level 3) now use a 5 degree wedge of the real tapered mug with the torus as a rotating wall (17k and 33k cells). The 3D steady rotating-frame run on the 1.45M-cell mesh continues and serves as the check on the wedge model's end state. Spokes and non-axisymmetric turbulence structure are not represented in the wedge runs.
+
+### Early 3D steady result (not yet converged)
+
+After 65 iterations the frother torque has settled at about -3.0 mN·m (3.8 W at 12,000 RPM, plausible for a handheld frother), but the mug walls only take +0.9 mN·m back. The coffee is still spinning up inside the steady solver; the run continues.
+
+### META
+
+Batch sessions (`meta_post64 -b -s`) load AcuSolve results via EnSight. Solid faces render white in batch mode, but cut planes show contours properly, so all volume renders use cut planes. `cfd/scripts/derive_fields.py` adds radial velocity, swirl velocity and speed to the EnSight case for META.

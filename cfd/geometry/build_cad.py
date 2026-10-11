@@ -93,11 +93,20 @@ def build(variant, level, out_dir, surface_mesh=True, name_tag="", h_head=None, 
     v_fluid = sum(occ.getMass(*e) for e in fluid)
 
     mrf = occ.addCylinder(0, 0, P.MRF_Z0 * MM, 0, 0, (P.MRF_Z1 - P.MRF_Z0) * MM, P.MRF_R * MM)
-    frag, fmap = occ.fragment(fluid, [(3, mrf)])
+    cutters = [(3, mrf)]
+    if level == 3:
+        # internal plane at the initial liquid level: seeds fine cells where the free surface starts
+        cutters.append((2, occ.addDisk(0, 0, P.LIQUID_H * MM, P.MUG_R_RIM * MM + 5, P.MUG_R_RIM * MM + 5)))
+    frag, fmap = occ.fragment(fluid, cutters)
     keep = {e for e in fmap[0]}
-    extra = [e for e in frag if e not in keep]
+    extra = [e for e in frag if e not in keep and e[0] == 3]
     if extra:
         occ.remove(extra, recursive=True)
+    occ.synchronize()
+    for dim, s in gmsh.model.getEntities(2):
+        up, _ = gmsh.model.getAdjacencies(dim, s)
+        if len(up) == 0:
+            occ.remove([(dim, s)], recursive=True)
     occ.synchronize()
 
     vols = gmsh.model.getEntities(3)
@@ -127,7 +136,7 @@ def classify(occ, level, top):
     mrf_r, z0, z1 = P.MRF_R * MM, P.MRF_Z0 * MM, P.MRF_Z1 * MM
     rs = P.SHAFT_D / 2 * MM
     g = {k: [] for k in ("frother_head", "shaft_rotor", "shaft_stator", "mug_wall", "mug_bottom",
-                         "top", "mrf_side", "mrf_top", "mrf_bottom")}
+                         "top", "mrf_side", "mrf_top", "mrf_bottom", "liquid_level")}
     for dim, tag in gmsh.model.getEntities(2):
         typ = gmsh.model.getType(dim, tag)
         x, y, z = occ.getCenterOfMass(dim, tag)
@@ -139,6 +148,8 @@ def classify(occ, level, top):
             g["mug_bottom"].append(tag)
         elif typ == "Plane" and abs(z - top) < 1e-6:
             g["top"].append(tag)
+        elif typ == "Plane" and level == 3 and abs(z - P.LIQUID_H * MM) < 1e-6:
+            g["liquid_level"].append(tag)
         elif typ == "Plane" and abs(z - z1) < 1e-6:
             g["mrf_top"].append(tag)
         elif typ == "Plane" and abs(z - z0) < 1e-6:
@@ -185,8 +196,19 @@ def mesh_surfaces(groups, vols, out_dir, name, variant, h_head=None, h_max=1.5, 
     f.setNumber(mrf, "XCenter", 0)
     f.setNumber(mrf, "YCenter", 0)
     f.setNumber(mrf, "ZCenter", P.HEAD_Z * MM)
+    fields = [th, mrf]
+    if "liquid_level" in groups:
+        dl = f.add("Distance")
+        f.setNumbers(dl, "SurfacesList", groups["liquid_level"])
+        tl = f.add("Threshold")
+        f.setNumber(tl, "InField", dl)
+        f.setNumber(tl, "SizeMin", 0.8)
+        f.setNumber(tl, "SizeMax", h_max)
+        f.setNumber(tl, "DistMin", 0.5)
+        f.setNumber(tl, "DistMax", 10.0)
+        fields.append(tl)
     mn = f.add("Min")
-    f.setNumbers(mn, "FieldsList", [th, mrf])
+    f.setNumbers(mn, "FieldsList", fields)
     f.setAsBackgroundMesh(mn)
 
     ids = {}

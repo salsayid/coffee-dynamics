@@ -1,0 +1,64 @@
+{
+  "variant": "A",
+  "level": 3,
+  "units": "mm",
+  "volumes": [
+    {
+      "tag": 1,
+      "volume_mm3": 228054.01735733,
+      "com": [
+        -1.7447793142893602e-16,
+        3.1916239703486587e-16,
+        73.50440462593379
+      ]
+    },
+    {
+      "tag": 2,
+      "volume_mm3": 115932.510402535,
+      "com": [
+        -1.521936957384216e-15,
+        -4.632625525806825e-16,
+        20.777304982795382
+      ]
+    },
+    {
+      "tag": 3,
+      "volume_mm3": 3792.828162459208,
+      "com": [
+        6.102641129219069e-08,
+        3.696962566097802e-08,
+        9.980518424350297
+      ]
+    }
+  ],
+  "frother_volume_removed_mm3": 1330.1278533581062,
+  "step": "C:\\Users\\aalsayid\\downloads\\per\\coffee-dynamics\\cfd\\mesh\\mug_A_L3_m0.step",
+  "faces": 23,
+  "groups": {
+    "frother_head": 12,
+    "shaft_rotor": 1,
+    "shaft_stator": 2,
+    "mug_wall": 2,
+    "mug_bottom": 1,
+    "top": 1,
+    "mrf_side": 1,
+    "mrf_top": 1,
+    "mrf_bottom": 1,
+    "liquid_level": 1
+  },
+  "surface_mesh": "C:\\Users\\aalsayid\\downloads\\per\\coffee-dynamics\\cfd\\mesh\\mug_A_L3_m0_surf.nas",
+  "pid": {
+    "frother_head": 1,
+    "liquid_level": 2,
+    "mrf_bottom": 3,
+    "mrf_side": 4,
+    "mrf_top": 5,
+    "mug_bottom": 6,
+    "mug_wall": 7,
+    "shaft_rotor": 8,
+    "shaft_stator": 9,
+    "top": 10
+  },
+  "n_tri": 83727,
+  "min_sicn": 0.6202979916981455
+}

@@ -1,6 +1,8 @@
 param(
     [Parameter(Mandatory = $true)][string]$Session,
-    [int]$TimeoutMin = 60
+    [int]$TimeoutMin = 60,
+    # batch (-b) mode on this machine draws only outlines; GUI mode renders filled contours. Session must end with "options quit".
+    [switch]$Gui
 )
 
 $meta = "C:\Users\aalsayid\AppData\Local\Apps\BETA_CAE_Systems\meta_post_v24.1.6\meta_post64.bat"
@@ -12,7 +14,10 @@ $log = Join-Path $logDir "meta_$name.log"
 $err = Join-Path $logDir "meta_$name.err"
 $work = Split-Path $ses
 
-$p = Start-Process -FilePath $meta -ArgumentList @("-nolauncher", "-b", "-noses", "-s", "`"$ses`"") `
+$args_ = @("-nolauncher", "-noses")
+if (-not $Gui) { $args_ += "-b" } else { $args_ += @("-geom", "1600x1100") }
+$args_ += @("-s", "`"$ses`"")
+$p = Start-Process -FilePath $meta -ArgumentList $args_ `
     -WorkingDirectory $work -PassThru -NoNewWindow -RedirectStandardOutput $log -RedirectStandardError $err
 if (-not $p.WaitForExit($TimeoutMin * 60 * 1000)) {
     Get-CimInstance Win32_Process | Where-Object { $_.Name -match 'meta_post' -and $_.CommandLine -match [regex]::Escape($ses) } |

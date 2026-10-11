@@ -1,0 +1,236 @@
+ANALYSIS {
+    title = "L2"
+    type = steady
+}
+
+EQUATION {
+    flow = navier_stokes
+    turbulence = shear_stress_transport
+}
+
+AUTO_SOLUTION_STRATEGY {
+    max_time_steps = 300
+    convergence_tolerance = 0.001
+}
+
+DENSITY_MODEL( "water85" ) {
+    density = 968.6
+}
+
+VISCOSITY_MODEL( "water85" ) {
+    viscosity = 0.000319638
+}
+
+MATERIAL_MODEL( "water85" ) {
+    density_model = "water85"
+    viscosity_model = "water85"
+}
+
+REFERENCE_FRAME( "rotor" ) {
+    centrifugal = on
+    coriolis = on
+    rotation_center = { 0, 0, 0 }
+    angular_velocity = { 0, 0, 1256.6370614359173 }
+}
+
+COORDINATE {
+    coordinates = Read( "../../mesh/acu_A_L2_m1/mesh.crd" )
+}
+
+ELEMENT_SET( "rotor_tet" ) {
+    elements = Read( "../../mesh/acu_A_L2_m1/rotor_tet.cnn" )
+    shape = four_node_tet
+    material_model = "water85"
+    reference_frame = "rotor"
+}
+
+ELEMENT_SET( "stator_tet" ) {
+    elements = Read( "../../mesh/acu_A_L2_m1/stator_tet.cnn" )
+    shape = four_node_tet
+    material_model = "water85"
+}
+
+ELEMENT_SET( "rotor_wedge" ) {
+    elements = Read( "../../mesh/acu_A_L2_m1/rotor_wedge.cnn" )
+    shape = six_node_wedge
+    material_model = "water85"
+    reference_frame = "rotor"
+}
+
+ELEMENT_SET( "stator_wedge" ) {
+    elements = Read( "../../mesh/acu_A_L2_m1/stator_wedge.cnn" )
+    shape = six_node_wedge
+    material_model = "water85"
+}
+
+ELEMENT_SET( "rotor_pyr" ) {
+    elements = Read( "../../mesh/acu_A_L2_m1/rotor_pyr.cnn" )
+    shape = five_node_pyramid
+    material_model = "water85"
+    reference_frame = "rotor"
+}
+
+ELEMENT_SET( "stator_pyr" ) {
+    elements = Read( "../../mesh/acu_A_L2_m1/stator_pyr.cnn" )
+    shape = five_node_pyramid
+    material_model = "water85"
+}
+
+SIMPLE_BOUNDARY_CONDITION( "frother_head__rotor_wedge__tri" ) {
+    surfaces = Read( "../../mesh/acu_A_L2_m1/frother_head__rotor_wedge__tri.srf" )
+    shape = three_node_triangle
+    element_set = "rotor_wedge"
+    type = wall
+    reference_frame = "rotor"
+}
+
+SURFACE_OUTPUT( "frother_head__rotor_wedge__tri" ) {
+    surfaces = Read( "../../mesh/acu_A_L2_m1/frother_head__rotor_wedge__tri.srf" )
+    shape = three_node_triangle
+    element_set = "rotor_wedge"
+    integrated_output_frequency = 1
+}
+
+SIMPLE_BOUNDARY_CONDITION( "mug_bottom__stator_wedge__tri" ) {
+    surfaces = Read( "../../mesh/acu_A_L2_m1/mug_bottom__stator_wedge__tri.srf" )
+    shape = three_node_triangle
+    element_set = "stator_wedge"
+    type = wall
+}
+
+SURFACE_OUTPUT( "mug_bottom__stator_wedge__tri" ) {
+    surfaces = Read( "../../mesh/acu_A_L2_m1/mug_bottom__stator_wedge__tri.srf" )
+    shape = three_node_triangle
+    element_set = "stator_wedge"
+    integrated_output_frequency = 1
+}
+
+SIMPLE_BOUNDARY_CONDITION( "mug_wall__stator_wedge__tri" ) {
+    surfaces = Read( "../../mesh/acu_A_L2_m1/mug_wall__stator_wedge__tri.srf" )
+    shape = three_node_triangle
+    element_set = "stator_wedge"
+    type = wall
+}
+
+SURFACE_OUTPUT( "mug_wall__stator_wedge__tri" ) {
+    surfaces = Read( "../../mesh/acu_A_L2_m1/mug_wall__stator_wedge__tri.srf" )
+    shape = three_node_triangle
+    element_set = "stator_wedge"
+    integrated_output_frequency = 1
+}
+
+SIMPLE_BOUNDARY_CONDITION( "shaft_rotor__rotor_wedge__tri" ) {
+    surfaces = Read( "../../mesh/acu_A_L2_m1/shaft_rotor__rotor_wedge__tri.srf" )
+    shape = three_node_triangle
+    element_set = "rotor_wedge"
+    type = wall
+    reference_frame = "rotor"
+}
+
+SURFACE_OUTPUT( "shaft_rotor__rotor_wedge__tri" ) {
+    surfaces = Read( "../../mesh/acu_A_L2_m1/shaft_rotor__rotor_wedge__tri.srf" )
+    shape = three_node_triangle
+    element_set = "rotor_wedge"
+    integrated_output_frequency = 1
+}
+
+SIMPLE_BOUNDARY_CONDITION( "shaft_stator__stator_pyr__tri" ) {
+    surfaces = Read( "../../mesh/acu_A_L2_m1/shaft_stator__stator_pyr__tri.srf" )
+    shape = three_node_triangle
+    element_set = "stator_pyr"
+    type = wall
+    reference_frame = "rotor"
+}
+
+SURFACE_OUTPUT( "shaft_stator__stator_pyr__tri" ) {
+    surfaces = Read( "../../mesh/acu_A_L2_m1/shaft_stator__stator_pyr__tri.srf" )
+    shape = three_node_triangle
+    element_set = "stator_pyr"
+    integrated_output_frequency = 1
+}
+
+SIMPLE_BOUNDARY_CONDITION( "shaft_stator__stator_tet__tri" ) {
+    surfaces = Read( "../../mesh/acu_A_L2_m1/shaft_stator__stator_tet__tri.srf" )
+    shape = three_node_triangle
+    element_set = "stator_tet"
+    type = wall
+    reference_frame = "rotor"
+}
+
+SURFACE_OUTPUT( "shaft_stator__stator_tet__tri" ) {
+    surfaces = Read( "../../mesh/acu_A_L2_m1/shaft_stator__stator_tet__tri.srf" )
+    shape = three_node_triangle
+    element_set = "stator_tet"
+    integrated_output_frequency = 1
+}
+
+SIMPLE_BOUNDARY_CONDITION( "top__stator_pyr__quad" ) {
+    surfaces = Read( "../../mesh/acu_A_L2_m1/top__stator_pyr__quad.srf" )
+    shape = four_node_quad
+    element_set = "stator_pyr"
+    type = slip
+}
+
+SIMPLE_BOUNDARY_CONDITION( "top__stator_tet__tri" ) {
+    surfaces = Read( "../../mesh/acu_A_L2_m1/top__stator_tet__tri.srf" )
+    shape = three_node_triangle
+    element_set = "stator_tet"
+    type = slip
+}
+
+SIMPLE_BOUNDARY_CONDITION( "top__stator_wedge__quad" ) {
+    surfaces = Read( "../../mesh/acu_A_L2_m1/top__stator_wedge__quad.srf" )
+    shape = four_node_quad
+    element_set = "stator_wedge"
+    type = slip
+}
+
+NODAL_INITIAL_CONDITION( velocity ) {
+    default_values = { 0, 0, 0 }
+}
+
+NODAL_INITIAL_CONDITION( pressure ) {
+    default_value = 0
+}
+
+NODAL_INITIAL_CONDITION( kinetic_energy ) {
+    default_value = 1e-06
+}
+
+NODAL_INITIAL_CONDITION( eddy_frequency ) {
+    default_value = 3.030303e-01
+}
+
+NODAL_INITIAL_CONDITION( eddy_viscosity ) {
+    default_value = 3.300000e-06
+}
+
+NODAL_OUTPUT {
+    output_frequency = 50
+}
+
+RESTART_OUTPUT {
+    output_frequency = 50
+}
+
+TIME_HISTORY_OUTPUT( "radial_head" ) {
+    nodes = Read( "probe_radial_head.nbc" )
+    output_frequency = 1
+}
+
+TIME_HISTORY_OUTPUT( "radial_mid" ) {
+    nodes = Read( "probe_radial_mid.nbc" )
+    output_frequency = 1
+}
+
+TIME_HISTORY_OUTPUT( "radial_top" ) {
+    nodes = Read( "probe_radial_top.nbc" )
+    output_frequency = 1
+}
+
+TIME_HISTORY_OUTPUT( "vertical_r20" ) {
+    nodes = Read( "probe_vertical_r20.nbc" )
+    output_frequency = 1
+}
+
+RUN

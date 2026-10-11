@@ -52,6 +52,7 @@ def main():
         "pid": info["pid"],
         "layer_pids": ["frother_head", "shaft_rotor", "mug_wall", "mug_bottom"],
         "zone_type": {"mrf_side": "interior", "mrf_top": "interior", "mrf_bottom": "interior",
+                      "liquid_level": "interior",
                       "top": "symmetry" if a.level == 2 else "pressure-outlet"},
         "layers": not a.no_layers,
         "layers_mpar": layers,

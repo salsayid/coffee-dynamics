@@ -1,15 +1,16 @@
 {
- "surface_nas": "C:\\Users\\aalsayid\\downloads\\per\\coffee-dynamics\\cfd\\mesh\\mug_A_L22_surf.nas",
+ "surface_nas": "C:\\Users\\aalsayid\\downloads\\per\\coffee-dynamics\\cfd\\mesh\\mug_A_L3_m0_surf.nas",
  "pid": {
   "frother_head": 1,
-  "mrf_bottom": 2,
-  "mrf_side": 3,
-  "mrf_top": 4,
-  "mug_bottom": 5,
-  "mug_wall": 6,
-  "shaft_rotor": 7,
-  "shaft_stator": 8,
-  "top": 9
+  "liquid_level": 2,
+  "mrf_bottom": 3,
+  "mrf_side": 4,
+  "mrf_top": 5,
+  "mug_bottom": 6,
+  "mug_wall": 7,
+  "shaft_rotor": 8,
+  "shaft_stator": 9,
+  "top": 10
  },
  "layer_pids": [
   "frother_head",
@@ -21,19 +22,20 @@
   "mrf_side": "interior",
   "mrf_top": "interior",
   "mrf_bottom": "interior",
-  "top": "symmetry"
+  "liquid_level": "interior",
+  "top": "pressure-outlet"
  },
  "layers": true,
- "layers_mpar": "C:\\Users\\aalsayid\\downloads\\per\\coffee-dynamics\\cfd\\mesh\\mug_A_L2_m0_layers.ansa_mpar",
- "volume_mpar": "C:\\Users\\aalsayid\\downloads\\per\\coffee-dynamics\\cfd\\mesh\\mug_A_L2_m0_volume.ansa_mpar",
+ "layers_mpar": "C:\\Users\\aalsayid\\downloads\\per\\coffee-dynamics\\cfd\\mesh\\mug_A_L3_m0_layers.ansa_mpar",
+ "volume_mpar": "C:\\Users\\aalsayid\\downloads\\per\\coffee-dynamics\\cfd\\mesh\\mug_A_L3_m0_volume.ansa_mpar",
  "rotor_box": {
   "r": 13.0,
   "z0": 6.0,
   "z1": 14.0
  },
- "ansa_db": "C:\\Users\\aalsayid\\downloads\\per\\coffee-dynamics\\cfd\\mesh\\mug_A_L2_m0.ansa",
- "fluent_msh": "C:\\Users\\aalsayid\\downloads\\per\\coffee-dynamics\\cfd\\mesh\\mug_A_L2_m0.msh",
- "nastran": "C:\\Users\\aalsayid\\downloads\\per\\coffee-dynamics\\cfd\\mesh\\mug_A_L2_m0_vol.nas",
- "log": "C:\\Users\\aalsayid\\downloads\\per\\coffee-dynamics\\cfd\\mesh\\mug_A_L2_m0_ansa.log",
+ "ansa_db": "C:\\Users\\aalsayid\\downloads\\per\\coffee-dynamics\\cfd\\mesh\\mug_A_L3_m0.ansa",
+ "fluent_msh": "C:\\Users\\aalsayid\\downloads\\per\\coffee-dynamics\\cfd\\mesh\\mug_A_L3_m0.msh",
+ "nastran": "C:\\Users\\aalsayid\\downloads\\per\\coffee-dynamics\\cfd\\mesh\\mug_A_L3_m0_vol.nas",
+ "log": "C:\\Users\\aalsayid\\downloads\\per\\coffee-dynamics\\cfd\\mesh\\mug_A_L3_m0_ansa.log",
  "time_limit_min": 240
 }

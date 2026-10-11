@@ -96,7 +96,10 @@ def run(job, f):
     # ANSA puts all layer prisms in one property; split them between the rotating and fixed regions
     rc = job["rotor_box"]
     moved = {"rotor": 0, "stator": 0}
-    layer_pids = [c["PID"] for c in cards if c["PID"] not in (rotor_pid, stator_pid)]
+    layer_pids = [c["PID"] for c in cards if c["Tetras"] == 0 and c["Pentas"] > 0]
+    for c in tet_vols[1:-1]:
+        base.SetEntityCardValues(d, sprops[c["PID"]], {"Name": "stator_%d" % c["PID"], "ZONE_TYPE": "fluid",
+                                                       "DEFINED": "YES"})
     by_vol = {}
     for v in vols:
         pid = base.GetEntityCardValues(d, v, ["PID"])["PID"]
