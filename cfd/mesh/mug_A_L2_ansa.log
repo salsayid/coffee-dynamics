@@ -1,0 +1,24 @@
+imported shells: 96784
+properties: ['frother_head', 'mrf_bottom', 'mrf_side', 'mrf_top', 'mug_bottom', 'mug_wall', 'shaft_rotor', 'shaft_stator', 'top']
+pre-layer volumes detected: 2
+  orient volume 1 -> 1
+  orient volume 2 -> 1
+layers params read: 1
+layers run: 1
+solids after layers: 395964
+volume params read: 1
+volume run: 1
+total solids: 1446497
+volume {'PID': 12, 'Volume': 3687.1966678009217, 'Tetras': 0, 'Pentas': 395964, 'Pyramids': 0, 'Grids': 231637}
+volume {'PID': 14, 'Volume': 112437.71190586092, 'Tetras': 465592, 'Pentas': 0, 'Pyramids': 683, 'Grids': 88504}
+volume {'PID': 15, 'Volume': 3567.976628254241, 'Tetras': 584045, 'Pentas': 0, 'Pyramids': 213, 'Grids': 116086}
+layer property 12: 395964 solids
+layer prisms reassigned: {'rotor': 329172, 'stator': 66792}
+solid property 10: {'Name': 'Auto Detected Volume', 'Num.Elem': 0}
+solid property 11: {'Name': 'Auto Detected Volume', 'Num.Elem': 0}
+solid property 12: {'Name': 'Fluid Layers Property', 'Num.Elem': 0}
+solid property 14: {'Name': 'stator', 'Num.Elem': 862239}
+solid property 15: {'Name': 'rotor', 'Num.Elem': 584258}
+fluent output: 1 -> C:\Users\aalsayid\downloads\per\coffee-dynamics\cfd\mesh\mug_A_L2.msh
+nastran output: 1 -> C:\Users\aalsayid\downloads\per\coffee-dynamics\cfd\mesh\mug_A_L2_vol.nas
+DONE

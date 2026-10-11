@@ -1,0 +1,53 @@
+{
+  "variant": "A",
+  "level": 2,
+  "units": "mm",
+  "volumes": [
+    {
+      "tag": 1,
+      "volume_mm3": 115932.51040253502,
+      "com": [
+        3.6087164968904083e-16,
+        -5.177280216554899e-16,
+        20.777304982795386
+      ]
+    },
+    {
+      "tag": 2,
+      "volume_mm3": 3792.828162459208,
+      "com": [
+        6.102641129219069e-08,
+        3.696962566097802e-08,
+        9.980518424350297
+      ]
+    }
+  ],
+  "frother_volume_removed_mm3": 704.7545541524742,
+  "step": "C:\\Users\\aalsayid\\downloads\\per\\coffee-dynamics\\cfd\\mesh\\mug_A_L2.step",
+  "faces": 20,
+  "groups": {
+    "frother_head": 12,
+    "shaft_rotor": 1,
+    "shaft_stator": 1,
+    "mug_wall": 1,
+    "mug_bottom": 1,
+    "top": 1,
+    "mrf_side": 1,
+    "mrf_top": 1,
+    "mrf_bottom": 1
+  },
+  "surface_mesh": "C:\\Users\\aalsayid\\downloads\\per\\coffee-dynamics\\cfd\\mesh\\mug_A_L2_surf.nas",
+  "pid": {
+    "frother_head": 1,
+    "mrf_bottom": 2,
+    "mrf_side": 3,
+    "mrf_top": 4,
+    "mug_bottom": 5,
+    "mug_wall": 6,
+    "shaft_rotor": 7,
+    "shaft_stator": 8,
+    "top": 9
+  },
+  "n_tri": 96784,
+  "min_sicn": 0.7187118771646364
+}

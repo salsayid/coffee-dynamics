@@ -1,0 +1,89 @@
+#===FILEINFO:VERSION_CREATED:24.1.6 LAST_VERSION_MODIFIED:24.1.6===
+
+# 
+# ANSA Version
+#
+    ANSA_Version = 24.1.6
+# 
+
+# Volume Layers Options
+# 
+    layer_parameters_name                                = 
+    Isproportional                                       = Absolute
+    Requested_layers                                     = 5
+    Additional_outer_layers                              = 0
+    Last_aspect                                          = 0.8
+    Smooth_vectors                                       = true
+    Separate_vectors                                     = true
+    smooth_top_cap                                       = true
+    Collapse_free_edges                                  = true
+    Max_skewness_check                                   = true
+    Allow_squeeze                                        = true
+    Allow_proximities                                    = true
+    Minimum_first_height_check                           = false
+    Minimum_layer_aspect_check                           = false
+    Maximum_layer_aspect_check                           = true
+    retain_valid_layers                                  = false
+    Adjust_to_neighbs                                    = true
+    Auto_connect                                         = true
+    Generate_tria_interfaces                             = true
+    layers_first_height                                  = 0.2
+    layers_growth_factor                                 = 1.2
+    vectors_max_deviation                                = 60.
+    Separation_angle                                     = 175.
+    Max_skewness_limit                                   = 0.9
+    Proximity_factor                                     = 0.3
+    Min_first_height                                     = 0.1
+    Minimum_layer_aspect                                 = 0.05
+    Maximum_layer_aspect                                 = 0.8
+    Adjust_connect_angle_limit                           = 60.
+    layer_solid_prop_name                                = 
+    aspect_stop                                          = constant height
+    layers_light_volume_representation                   = false
+    Max_warping_check                                    = false
+    Max_warping_limit                                    = 30.
+    orthogonal_layers                                    = 0
+    Problematic_area_treatment                           = Stop
+    Growth_rate_method                                   = Constant
+    layers_variable_growth_factor                        = 
+    Auto-fix invalid normal vector areas                 = false
+    create_tetra_layers                                  = false
+    Limit_number_of_consecutive_collapsed_layers         = false
+    Max_number_of_consecutive_collapsed_layers           = 3
+    Collapsed_quad_treatment                             = Split shell mesh
+    Auto-fix_invalid_normal_vector_areas_max_move_factor = 0.5
+    Vector-Surface_angle_limit                           = 89.
+    Max move distance                                    = 0.
+    Areas_layers_should_not_connect                      = 0
+    Connect_to                                           = Visible
+    thin_area_treatment                                  = false
+    thin_area_maximum_thickness                          = 1.75
+    thin_area_maximum_thickness_mode                     = * local length
+    thin_area_layers_num                                 = 1
+    constant_height_layers                               = minimum
+    exclude_thin_side_walls                              = false
+    yplus_calculator_velocity                            = 1.
+    yplus_calculator_density                             = 1.225
+    yplus_calculator_viscosity                           = 1.789E-5
+    yplus_calculator_reference_length                    = 1.
+    yplus_calculator_yplus                               = 30.
+    type_of_flow                                         = Flat plate
+    First_height_start                                   = 0.1
+    First_height_end                                     = 0.1
+    variability_direction_x                              = 1.
+    variability_direction_y                              = 0.
+    variability_direction_z                              = 0.
+    variable_first_height_variability_type               = Linear
+    radial_variability_origin_x                          = 0.
+    radial_variability_origin_y                          = 0.
+    radial_variability_origin_z                          = 0.
+# 
+# Volume Fix Quality
+# 
+    fix_solid_elements_general_flag       = false
+    unconstrained_2nd_order_nodes         = false
+    fix_solid_constrained_layer_nodes     = true
+    fix_volume_external_bounds            = constrained
+    maximum_distance_from_external_bounds = 0.1*local
+    fix_volume_pid_bounds                 = unconstrained
+    maximum_distance_from_pid_bounds      = 0.1*local

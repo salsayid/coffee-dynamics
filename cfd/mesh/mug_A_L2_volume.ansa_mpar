@@ -1,0 +1,42 @@
+#===FILEINFO:VERSION_CREATED:24.1.6 LAST_VERSION_MODIFIED:24.1.6===
+
+# 
+# ANSA Version
+#
+    ANSA_Version = 24.1.6
+# 
+# Unstructured Volume Mesh Options
+# 
+    volume_mesh_parameters_name         = 
+    create_volume_mesh                  = true
+    tetras_algorithm                    = Tetra Rapid
+    tetras_criterion_type               = NASTRAN Max. Aspect Ratio
+    tetras_criterion_value              = 4.
+    tetras_max_growth_rate              = 1.2
+    tetras_max_elem_length              = 1.5
+    hexa_coordinate_system              = 0
+    hexa_buffer_zones                   = 3
+    create_pyramids                     = true
+    force2rows                          = false
+    frozen_entities_set_id              = 0
+    trans_pnt_offs                      = true
+    do_not_violate_max_len              = false
+    light_volume_representation         = false
+    auto_define_coord_system            = 
+    decompose_domain                    = false
+    connect_to_symmetry                 = false
+    smooth_hexa_interior_transition     = false
+    allow_reconstruction_of_volume_skin = false
+# 
+# Auto Detect Volumes Options
+# 
+    auto_detected_volume_property_name   = 
+# 
+# Volume Fix Quality
+# 
+    fix_solid_elements_general_flag       = false
+    unconstrained_2nd_order_nodes         = false
+    fix_volume_external_bounds            = constrained
+    maximum_distance_from_external_bounds = 0.1*local
+    fix_volume_pid_bounds                 = unconstrained
+    maximum_distance_from_pid_bounds      = 0.1*local
