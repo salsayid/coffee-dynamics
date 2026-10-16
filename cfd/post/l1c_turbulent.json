@@ -1,0 +1,11 @@
+{
+ "re": 981000.0,
+ "midgap_u_over_U_turb": 0.1949477463993689,
+ "midgap_u_over_U_lam": 0.2928994082840235,
+ "torque_per_length_turb": 0.14807131711608634,
+ "torque_per_length_lam": 0.0006123969770656791,
+ "torque_ratio_turb_over_lam": 241.78975837793172,
+ "G_sim": 1403778527.4524224,
+ "G_wendt_extrapolated": 1082244682.474357,
+ "sim_over_wendt": 1.297099029623261
+}

@@ -47,11 +47,14 @@ def main(case=os.path.join(ROOT, "cfd", "cases", "L2b_axi_spinup")):
 
     final = wb[-1]
     tau = float(np.interp(0.632 * final, wb, t)) if final > 0 and wb.max() >= 0.632 * final else float("nan")
+    # the first ~0.2 s is the impulsive-start transient; measure the spin-up effect from t = 0.5 s
+    i05 = int(np.argmin(np.abs(t_tq - 0.5)))
     summary = dict(t_end=float(t[-1]), omega_bulk_final=float(final), omega_ring_final=float(wr[-1]),
                    re_rel_start=float(rerel[0]), re_rel_final=float(rerel[-1]), re_static=float(re0),
-                   spinup_time_63=tau, torque_start=float(frother[min(5, len(frother) - 1)]),
-                   torque_final=float(frother[-1]), mug_torque_final=float(mug[-1]),
-                   power_final_W=float(frother[-1] * P.OMEGA))
+                   spinup_time_63=tau, torque_first_step=float(frother[min(5, len(frother) - 1)]),
+                   torque_at_0p5s=float(frother[i05]), torque_final=float(frother[-1]),
+                   torque_change_spinup=float(frother[-1] / frother[i05] - 1),
+                   mug_torque_final=float(mug[-1]), power_final_W=float(frother[-1] * P.OMEGA))
     json.dump({"summary": summary, "rows": rows}, open(os.path.join(ROOT, "cfd", "post", "l2b_spinup.json"), "w"),
               indent=1)
     print(json.dumps(summary, indent=1))
@@ -66,12 +69,13 @@ def main(case=os.path.join(ROOT, "cfd", "cases", "L2b_axi_spinup")):
 
     ax[1].plot(t, wb, color="#2c5f8a", lw=2, label="whole cup (angular-momentum average)")
     ax[1].plot(t, wr, color="#edae49", lw=2, label="ring just outside the frother")
-    ax[1].axhline(P.OMEGA, color="gray", ls="--", lw=0.8)
-    ax[1].text(t[-1], P.OMEGA * 0.97, "frother 1257 rad/s", ha="right", va="top", color="gray", fontsize=9)
+    ax[1].set_ylim(0, max(wr.max(), wb.max()) * 1.35)
+    ax[1].text(0.98, 0.97, f"frother: {P.OMEGA:.0f} rad/s (way off the chart)", transform=ax[1].transAxes,
+               ha="right", va="top", color="gray", fontsize=9)
     ax[1].set_xlabel("time since switching on [s]")
     ax[1].set_ylabel("rotation rate [rad/s]")
     ax[1].set_title("The coffee spins up")
-    ax[1].legend(frameon=False, loc="center right")
+    ax[1].legend(frameon=False, loc="lower right")
     ax1b = ax[1].twinx()
     ax1b.plot(t, rerel / 1e3, color="#d1495b", lw=1.4, ls=":")
     ax1b.set_ylabel("frother-relative Re [thousands]", color="#d1495b")

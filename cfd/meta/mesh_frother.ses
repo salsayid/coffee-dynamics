@@ -1,0 +1,19 @@
+read geom Ensight "C:/Users/aalsayid/downloads/per/coffee-dynamics/cfd/cases/L2a_mrf_A_m1/case.1.case"
+window size 1400,1000
+erase all
+add pid 7
+add pid 10
+add pid 11
+add pid 12
+grstyle shade on
+grstyle wire on
+view default isometric
+view center
+write png "C:/Users/aalsayid/downloads/per/coffee-dynamics/figures/meta_mesh_frother.png"
+add all
+erase pid 13-15
+erase pid 1-6
+view default isometric
+view center
+write png "C:/Users/aalsayid/downloads/per/coffee-dynamics/figures/meta_mesh_mug.png"
+options quit

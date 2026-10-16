@@ -34,14 +34,14 @@ def trans(case_dir, *args):
     return r.stdout
 
 
-def nodal(case_dir, var="velocity", step="L"):
+def nodal(case_dir, var="velocity", step="L", mesh_dir=None):
     """Return (ids, xyz, values) for one nodal variable at one time step."""
     for f in glob.glob(os.path.join(case_dir, "case_step*.out")):
         os.remove(f)
     trans(case_dir, "-out", "-to", "table", "-outv", var, "-ts", str(step))
     out = sorted(glob.glob(os.path.join(case_dir, "case_step*.out")))[-1]
     vals = np.loadtxt(out)
-    crd = np.loadtxt(os.path.join(case_dir, "MESH.DIR", "mesh.crd"))
+    crd = np.loadtxt(os.path.join(mesh_dir or os.path.join(case_dir, "MESH.DIR"), "mesh.crd"))
     return crd[:, 0].astype(int), crd[:, 1:4], vals
 
 

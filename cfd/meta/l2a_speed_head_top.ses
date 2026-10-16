@@ -1,0 +1,15 @@
+read geom Ensight "C:/Users/aalsayid/downloads/per/coffee-dynamics/cfd/cases/L2a_mrf_A_m1/case.1.case"
+read onlyfun Ensight "C:/Users/aalsayid/downloads/per/coffee-dynamics/cfd/cases/L2a_mrf_A_m1/case.1.case" all speed
+options state 1
+grstyle scalarfringe onnode
+grstyle scalarfringe enable
+color fringebar scalarset Rainbow
+srange window act set 0,4
+window size 1400,1000
+plane new cut0 xyz 0,0,0.01 0,0,1
+plane options onlysection enable all
+erase pid 7-15
+view default top
+view center
+write png "C:/Users/aalsayid/downloads/per/coffee-dynamics/cfd/post/meta_test_l2a_top.png"
+options quit

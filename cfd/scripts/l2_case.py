@@ -35,8 +35,22 @@ def probes(mesh_dir, case_dir):
     return sel
 
 
+def init_from(src_case, case_dir, mesh_dir):
+    """Write nodal initial-condition files from the last output of another case on the same mesh."""
+    sys.path.insert(0, HERE)
+    import acu
+    files = {}
+    for var in ("velocity", "pressure", "kinetic_energy", "eddy_frequency", "eddy_viscosity"):
+        ids, _, vals = acu.nodal(src_case, var, mesh_dir=mesh_dir)
+        vals = vals.reshape(len(ids), -1)
+        fn = os.path.join(case_dir, f"init_{var}.nic")
+        np.savetxt(fn, np.column_stack([ids, vals]), fmt="%d" + " %.8e" * vals.shape[1])
+        files[var] = os.path.basename(fn)
+    return files
+
+
 def write(case_dir, mesh_dir, transient=False, dt=5e-4, final_time=10.0, nsteps=400, out_every=200,
-          tol=1e-3, omega=P.OMEGA, title="L2", restart=None):
+          tol=1e-3, omega=P.OMEGA, title="L2", restart=None, stagger=3):
     os.makedirs(case_dir, exist_ok=True)
     meta = json.load(open(os.path.join(mesh_dir, "mesh_meta.json")))
     rel = os.path.relpath(mesh_dir, case_dir).replace("\\", "/")
@@ -47,7 +61,7 @@ def write(case_dir, mesh_dir, transient=False, dt=5e-4, final_time=10.0, nsteps=
     if transient:
         w(f"AUTO_SOLUTION_STRATEGY {{\n    max_time_steps = {nsteps}\n    final_time = {final_time}\n"
           f"    initial_time_increment = {dt}\n    auto_time_increment = off\n"
-          f"    max_stagger_iterations = 3\n    convergence_tolerance = {tol}\n}}\n")
+          f"    max_stagger_iterations = {stagger}\n    convergence_tolerance = {tol}\n}}\n")
     else:
         w(f"AUTO_SOLUTION_STRATEGY {{\n    max_time_steps = {nsteps}\n    convergence_tolerance = {tol}\n}}\n")
     w(f'DENSITY_MODEL( "water85" ) {{\n    density = {P.RHO}\n}}\n')
@@ -78,11 +92,15 @@ def write(case_dir, mesh_dir, transient=False, dt=5e-4, final_time=10.0, nsteps=
             w(f'SURFACE_OUTPUT( "{tag}" ) {{\n{body}    integrated_output_frequency = 1\n}}\n')
     nut0 = 10 * P.NU
     k0 = 1e-6
-    w("NODAL_INITIAL_CONDITION( velocity ) {\n    default_values = { 0, 0, 0 }\n}\n")
-    w("NODAL_INITIAL_CONDITION( pressure ) {\n    default_value = 0\n}\n")
-    w(f"NODAL_INITIAL_CONDITION( kinetic_energy ) {{\n    default_value = {k0}\n}}\n")
-    w(f"NODAL_INITIAL_CONDITION( eddy_frequency ) {{\n    default_value = {k0 / nut0:.6e}\n}}\n")
-    w(f"NODAL_INITIAL_CONDITION( eddy_viscosity ) {{\n    default_value = {nut0:.6e}\n}}\n")
+    if restart:
+        for var, fn in init_from(restart, case_dir, mesh_dir).items():
+            w(f'NODAL_INITIAL_CONDITION( {var} ) {{\n    type = nodal_values\n    nodal_values = Read( "{fn}" )\n}}\n')
+    else:
+        w("NODAL_INITIAL_CONDITION( velocity ) {\n    default_values = { 0, 0, 0 }\n}\n")
+        w("NODAL_INITIAL_CONDITION( pressure ) {\n    default_value = 0\n}\n")
+        w(f"NODAL_INITIAL_CONDITION( kinetic_energy ) {{\n    default_value = {k0}\n}}\n")
+        w(f"NODAL_INITIAL_CONDITION( eddy_frequency ) {{\n    default_value = {k0 / nut0:.6e}\n}}\n")
+        w(f"NODAL_INITIAL_CONDITION( eddy_viscosity ) {{\n    default_value = {nut0:.6e}\n}}\n")
     w(f"NODAL_OUTPUT {{\n    output_frequency = {out_every}\n}}\n")
     w(f"RESTART_OUTPUT {{\n    output_frequency = {out_every}\n}}\n")
     for name in probes(mesh_dir, case_dir):
@@ -105,6 +123,9 @@ if __name__ == "__main__":
     ap.add_argument("--nsteps", type=int, default=400)
     ap.add_argument("--out_every", type=int, default=200)
     ap.add_argument("--tol", type=float, default=1e-3)
+    ap.add_argument("--init_from", default=None, help="case dir whose last output seeds the initial fields")
+    ap.add_argument("--stagger", type=int, default=3)
     a = ap.parse_args()
-    write(a.case_dir, a.mesh_dir, a.transient, a.dt, a.final_time, a.nsteps, a.out_every, a.tol)
+    write(a.case_dir, a.mesh_dir, a.transient, a.dt, a.final_time, a.nsteps, a.out_every, a.tol,
+          restart=a.init_from, stagger=a.stagger)
     print("wrote", a.case_dir)
