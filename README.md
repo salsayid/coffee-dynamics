@@ -11,8 +11,14 @@ This is my attempt to answer that question properly. Not just qualitatively, but
 >
 > I got into this kind of problem through undergrad research with the [Park Research Group](https://mmfd.unl.edu/). That is where I learned to take a flow apart instead of just watching it. The runs on this page are mine. 
 
-
+### Sneak peak :)
+<p align="center">
+  <img src="figures/l2b_spinup.gif" width="600" alt="Spin-up, side view, six seconds"/>
+</p>
 <br> 
+
+
+
 
 ### My Mug
 | Parameter |Symbol | Value |
