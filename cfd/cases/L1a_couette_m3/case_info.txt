@@ -1,0 +1,15 @@
+re = 50.0
+nu = 3.3e-07
+rho = 968.6
+mu = 0.000319638
+omega = 0.0641399416909621
+nr = 160
+nz = 2
+nth = 8
+wedge_deg = 5.0
+length = 0.005
+r1 = 0.0105
+r2 = 0.035
+n_nodes = 4347
+n_elems = 2560
+first = None

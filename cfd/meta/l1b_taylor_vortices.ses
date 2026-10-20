@@ -1,0 +1,14 @@
+read geom Ensight "C:/Users/aalsayid/downloads/per/coffee-dynamics/cfd/cases/L1b_Re150/case.1.case"
+read onlyfun Ensight "C:/Users/aalsayid/downloads/per/coffee-dynamics/cfd/cases/L1b_Re150/case.1.case" all u_radial
+options state 1
+grstyle scalarfringe onnode
+grstyle scalarfringe enable
+color fringebar scalarset Rainbow
+srange window act set -0.0004,0.0004
+window size 900,1300
+plane new cut0 xyz 0.02,0.0004,0.05 0,1,0
+plane options onlysection enable all
+view default left
+view center
+write png "C:/Users/aalsayid/downloads/per/coffee-dynamics/figures/meta_taylor_vortices.png"
+options quit

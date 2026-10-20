@@ -1,0 +1,192 @@
+{
+ "summary": {
+  "t_end": 0.45,
+  "dip_depth_final_mm": 35.80388311953895,
+  "wall_rise_final_mm": 9.797926748039366,
+  "time_air_reaches_frother": 0.4,
+  "frother_wetted_final": 0.7065344134275634,
+  "water_volume_drift": -3.1853460527697663e-05
+ },
+ "rows": [
+  {
+   "time": 0.025,
+   "dip_bottom_z": 0.03757793143464414,
+   "dip_depth": 0.002422068565355859,
+   "wall_height": 0.04012462619893016,
+   "frother_wetted": 1.0,
+   "water_volume": 0.00011961602030136748,
+   "omega_bulk": 1.2733659713543997,
+   "water_volume_change": 0.0
+  },
+  {
+   "time": 0.05,
+   "dip_bottom_z": 0.03446247919168556,
+   "dip_depth": 0.00553752080831444,
+   "wall_height": 0.04032665184035615,
+   "frother_wetted": 1.0,
+   "water_volume": 0.00011961596123773775,
+   "omega_bulk": 2.504325248504976,
+   "water_volume_change": -4.93776917021016e-07
+  },
+  {
+   "time": 0.075,
+   "dip_bottom_z": 0.037946598542377454,
+   "dip_depth": 0.0020534014576225473,
+   "wall_height": 0.04039141215085729,
+   "frother_wetted": 1.0,
+   "water_volume": 0.00011961594974080504,
+   "omega_bulk": 3.7120316635205355,
+   "water_volume_change": -5.898922423863695e-07
+  },
+  {
+   "time": 0.1,
+   "dip_bottom_z": 0.03801173516749388,
+   "dip_depth": 0.001988264832506123,
+   "wall_height": 0.040357782726122435,
+   "frother_wetted": 1.0,
+   "water_volume": 0.00011961598236101183,
+   "omega_bulk": 4.855075598295262,
+   "water_volume_change": -3.171845673888285e-07
+  },
+  {
+   "time": 0.125,
+   "dip_bottom_z": 0.03723203533210876,
+   "dip_depth": 0.00276796466789124,
+   "wall_height": 0.04026271672643342,
+   "frother_wetted": 1.0,
+   "water_volume": 0.00011961602552032252,
+   "omega_bulk": 5.964586747683097,
+   "water_volume_change": 4.363090355674615e-08
+  },
+  {
+   "time": 0.15,
+   "dip_bottom_z": 0.03784749374358289,
+   "dip_depth": 0.0021525062564171082,
+   "wall_height": 0.040232243132999015,
+   "frother_wetted": 1.0,
+   "water_volume": 0.0001196160323392204,
+   "omega_bulk": 7.045275488165079,
+   "water_volume_change": 1.006374639178631e-07
+  },
+  {
+   "time": 0.17500000000000002,
+   "dip_bottom_z": 0.03804326495476662,
+   "dip_depth": 0.0019567350452333807,
+   "wall_height": 0.0404670592575032,
+   "frother_wetted": 1.0,
+   "water_volume": 0.0001196159728631478,
+   "omega_bulk": 8.081810147398107,
+   "water_volume_change": -3.965875102762695e-07
+  },
+  {
+   "time": 0.2,
+   "dip_bottom_z": 0.036917657535251086,
+   "dip_depth": 0.0030823424647489148,
+   "wall_height": 0.04084965075052925,
+   "frother_wetted": 1.0,
+   "water_volume": 0.00011961586736740812,
+   "omega_bulk": 9.061202018390377,
+   "water_volume_change": -1.2785407754734024e-06
+  },
+  {
+   "time": 0.225,
+   "dip_bottom_z": 0.034616857985253775,
+   "dip_depth": 0.0053831420147462256,
+   "wall_height": 0.04128768999570884,
+   "frother_wetted": 1.0,
+   "water_volume": 0.00011961574080220988,
+   "omega_bulk": 9.99637552642901,
+   "water_volume_change": -2.336636488076138e-06
+  },
+  {
+   "time": 0.25,
+   "dip_bottom_z": 0.03225704566486009,
+   "dip_depth": 0.007742954335139912,
+   "wall_height": 0.041684563929701345,
+   "frother_wetted": 1.0,
+   "water_volume": 0.00011961565559252897,
+   "omega_bulk": 10.899218960148136,
+   "water_volume_change": -3.0489965942015473e-06
+  },
+  {
+   "time": 0.275,
+   "dip_bottom_z": 0.03466401625699418,
+   "dip_depth": 0.005335983743005819,
+   "wall_height": 0.0421248967047234,
+   "frother_wetted": 1.0,
+   "water_volume": 0.00011961559031808714,
+   "omega_bulk": 11.756115505033412,
+   "water_volume_change": -3.594696423303567e-06
+  },
+  {
+   "time": 0.3,
+   "dip_bottom_z": 0.03288800529654107,
+   "dip_depth": 0.007111994703458933,
+   "wall_height": 0.04269388645629185,
+   "frother_wetted": 1.0,
+   "water_volume": 0.00011961540528119024,
+   "omega_bulk": 12.528807661487814,
+   "water_volume_change": -5.141620459281349e-06
+  },
+  {
+   "time": 0.325,
+   "dip_bottom_z": 0.027257675943907662,
+   "dip_depth": 0.012742324056092338,
+   "wall_height": 0.04357898519758606,
+   "frother_wetted": 1.0,
+   "water_volume": 0.00011961481800376991,
+   "omega_bulk": 13.159222167431334,
+   "water_volume_change": -1.0051309135117314e-05
+  },
+  {
+   "time": 0.35000000000000003,
+   "dip_bottom_z": 0.017525492237348728,
+   "dip_depth": 0.022474507762651273,
+   "wall_height": 0.04491044398589366,
+   "frother_wetted": 1.0,
+   "water_volume": 0.00011961327623258243,
+   "omega_bulk": 13.649310722662909,
+   "water_volume_change": -2.2940646061786474e-05
+  },
+  {
+   "time": 0.375,
+   "dip_bottom_z": 0.012265160670103293,
+   "dip_depth": 0.027734839329896708,
+   "wall_height": 0.04639212124369769,
+   "frother_wetted": 1.0,
+   "water_volume": 0.00011961230161231312,
+   "omega_bulk": 14.11718550459684,
+   "water_volume_change": -3.108855356492857e-05
+  },
+  {
+   "time": 0.4,
+   "dip_bottom_z": 0.00941180566994701,
+   "dip_depth": 0.03058819433005299,
+   "wall_height": 0.04800452999142627,
+   "frother_wetted": 1.0,
+   "water_volume": 0.0001196120232479147,
+   "omega_bulk": 14.649047204317743,
+   "water_volume_change": -3.341570337078714e-05
+  },
+  {
+   "time": 0.425,
+   "dip_bottom_z": 0.006458937303516691,
+   "dip_depth": 0.03354106269648331,
+   "wall_height": 0.04919722626470726,
+   "frother_wetted": 0.8404671705642083,
+   "water_volume": 0.00011961217400737522,
+   "omega_bulk": 15.244493594202261,
+   "water_volume_change": -3.215534158862443e-05
+  },
+  {
+   "time": 0.45,
+   "dip_bottom_z": 0.004196116880461049,
+   "dip_depth": 0.03580388311953895,
+   "wall_height": 0.049797926748039366,
+   "frother_wetted": 0.7065344134275634,
+   "water_volume": 0.00011961221011718634,
+   "omega_bulk": 15.57934823883594,
+   "water_volume_change": -3.1853460527697663e-05
+  }
+ ]
+}

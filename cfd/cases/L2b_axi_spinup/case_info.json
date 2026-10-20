@@ -1,0 +1,8 @@
+{
+ "level": 2,
+ "dt": 0.002,
+ "final_time": 10.0,
+ "out_every": 50,
+ "wedge_deg": 5.0,
+ "omega": 1256.6370614359173
+}

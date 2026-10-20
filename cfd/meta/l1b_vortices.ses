@@ -1,0 +1,18 @@
+read geom Ensight "C:/Users/aalsayid/downloads/per/coffee-dynamics/cfd/cases/L1b_Re150/case.1.case"
+read onlyfun Ensight "C:/Users/aalsayid/downloads/per/coffee-dynamics/cfd/cases/L1b_Re150/case.1.case" all u_radial
+options state 1
+add all
+grstyle wire off
+grstyle shade on
+grstyle scalarfringe onnode
+grstyle scalarfringe enable
+color fringebar scalarset Rainbow
+window size 1400,1000
+view default isometric
+view center
+write png "C:/Users/aalsayid/downloads/per/coffee-dynamics/cfd/post/meta_dbg_iso.png"
+plane new sec xyz 0.02,0.0005,0.05 0,1,0
+view default left
+view center
+write png "C:/Users/aalsayid/downloads/per/coffee-dynamics/cfd/post/meta_dbg_plane.png"
+options quit

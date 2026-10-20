@@ -1,0 +1,244 @@
+ANALYSIS {
+    title = "axisymmetric L3"
+    type = transient
+}
+
+EQUATION {
+    flow = navier_stokes
+    turbulence = shear_stress_transport
+    multi_field = levelset
+    fields = { "water", "air" }
+    gravitational_acceleration = { 0, 0, -9.81 }
+}
+
+AUTO_SOLUTION_STRATEGY {
+    max_time_steps = 1501
+    final_time = 1.5
+    initial_time_increment = 0.001
+    auto_time_increment = off
+    max_stagger_iterations = 2
+    convergence_tolerance = 1e-3
+}
+
+STAGGER( "redistancing" ) {
+    equation = levelset_redistancing
+    min_stagger_iterations = 2
+    max_stagger_iterations = 4
+    convergence_tolerance = 0.01
+    lhs_update_frequency = 1
+}
+
+DENSITY_MODEL( "water" ) {
+    density = 968.6
+}
+
+VISCOSITY_MODEL( "water" ) {
+    viscosity = 0.000319638
+}
+
+MATERIAL_MODEL( "water" ) {
+    density_model = "water"
+    viscosity_model = "water"
+}
+
+DENSITY_MODEL( "air" ) {
+    density = 1.0
+}
+
+VISCOSITY_MODEL( "air" ) {
+    viscosity = 2.1e-05
+}
+
+MATERIAL_MODEL( "air" ) {
+    density_model = "air"
+    viscosity_model = "air"
+}
+
+FIELD( "water" ) {
+    material_model = "water"
+}
+
+FIELD( "air" ) {
+    material_model = "air"
+}
+
+FIELD_INTERACTION_MODEL( "free surface" ) {
+    type = levelset
+    fields_1 = { "air" }
+    fields_2 = { "water" }
+    thickness_type = auto
+}
+
+MULTI_FIELD_MODEL( "water-air" ) {
+    field_interaction_models = { "free surface" }
+    viscosity_type = linear
+    immiscible_interface_type = smooth
+}
+
+REFERENCE_FRAME( "rotor" ) {
+    rotation_center = { 0, 0, 0 }
+    angular_velocity = { 0, 0, 1256.6370614359173 }
+}
+
+COORDINATE {
+    coordinates = Read( "MESH.DIR/mesh.crd" )
+}
+
+ELEMENT_SET( "fluid_wedge" ) {
+    elements = Read( "MESH.DIR/fluid_wedge.cnn" )
+    shape = six_node_wedge
+    medium = multi_field
+    multi_field_model = "water-air"
+}
+
+ELEMENT_SET( "fluid_hex" ) {
+    elements = Read( "MESH.DIR/fluid_hex.cnn" )
+    shape = eight_node_brick
+    medium = multi_field
+    multi_field_model = "water-air"
+}
+
+SIMPLE_BOUNDARY_CONDITION( "axis__fluid_hex__quad" ) {
+    surfaces = Read( "MESH.DIR/axis__fluid_hex__quad.srf" )
+    shape = four_node_quad
+    element_set = "fluid_hex"
+    type = slip
+}
+
+SIMPLE_BOUNDARY_CONDITION( "axis__fluid_wedge__quad" ) {
+    surfaces = Read( "MESH.DIR/axis__fluid_wedge__quad.srf" )
+    shape = four_node_quad
+    element_set = "fluid_wedge"
+    type = slip
+}
+
+SIMPLE_BOUNDARY_CONDITION( "bottom__fluid_hex__quad" ) {
+    surfaces = Read( "MESH.DIR/bottom__fluid_hex__quad.srf" )
+    shape = four_node_quad
+    element_set = "fluid_hex"
+    type = wall
+}
+
+SURFACE_OUTPUT( "bottom__fluid_hex__quad" ) {
+    surfaces = Read( "MESH.DIR/bottom__fluid_hex__quad.srf" )
+    shape = four_node_quad
+    element_set = "fluid_hex"
+    integrated_output_frequency = 1
+}
+
+SIMPLE_BOUNDARY_CONDITION( "hub__fluid_hex__quad" ) {
+    surfaces = Read( "MESH.DIR/hub__fluid_hex__quad.srf" )
+    shape = four_node_quad
+    element_set = "fluid_hex"
+    type = wall
+    reference_frame = "rotor"
+}
+
+SURFACE_OUTPUT( "hub__fluid_hex__quad" ) {
+    surfaces = Read( "MESH.DIR/hub__fluid_hex__quad.srf" )
+    shape = four_node_quad
+    element_set = "fluid_hex"
+    integrated_output_frequency = 1
+}
+
+SIMPLE_BOUNDARY_CONDITION( "mug_wall__fluid_hex__quad" ) {
+    surfaces = Read( "MESH.DIR/mug_wall__fluid_hex__quad.srf" )
+    shape = four_node_quad
+    element_set = "fluid_hex"
+    type = wall
+}
+
+SURFACE_OUTPUT( "mug_wall__fluid_hex__quad" ) {
+    surfaces = Read( "MESH.DIR/mug_wall__fluid_hex__quad.srf" )
+    shape = four_node_quad
+    element_set = "fluid_hex"
+    integrated_output_frequency = 1
+}
+
+SIMPLE_BOUNDARY_CONDITION( "shaft__fluid_hex__quad" ) {
+    surfaces = Read( "MESH.DIR/shaft__fluid_hex__quad.srf" )
+    shape = four_node_quad
+    element_set = "fluid_hex"
+    type = wall
+    reference_frame = "rotor"
+}
+
+SURFACE_OUTPUT( "shaft__fluid_hex__quad" ) {
+    surfaces = Read( "MESH.DIR/shaft__fluid_hex__quad.srf" )
+    shape = four_node_quad
+    element_set = "fluid_hex"
+    integrated_output_frequency = 1
+}
+
+SIMPLE_BOUNDARY_CONDITION( "top__fluid_hex__quad" ) {
+    surfaces = Read( "MESH.DIR/top__fluid_hex__quad.srf" )
+    shape = four_node_quad
+    element_set = "fluid_hex"
+    type = slip
+}
+
+SIMPLE_BOUNDARY_CONDITION( "top__fluid_wedge__quad" ) {
+    surfaces = Read( "MESH.DIR/top__fluid_wedge__quad.srf" )
+    shape = four_node_quad
+    element_set = "fluid_wedge"
+    type = slip
+}
+
+SIMPLE_BOUNDARY_CONDITION( "torus__fluid_hex__quad" ) {
+    surfaces = Read( "MESH.DIR/torus__fluid_hex__quad.srf" )
+    shape = four_node_quad
+    element_set = "fluid_hex"
+    type = wall
+    reference_frame = "rotor"
+}
+
+SURFACE_OUTPUT( "torus__fluid_hex__quad" ) {
+    surfaces = Read( "MESH.DIR/torus__fluid_hex__quad.srf" )
+    shape = four_node_quad
+    element_set = "fluid_hex"
+    integrated_output_frequency = 1
+}
+
+PERIODIC_BOUNDARY_CONDITION( "wedge" ) {
+    variable = all
+    type = axisymmetric
+    nodal_pairs = Read( "MESH.DIR/wedge.pbc" )
+    rotation_axis = { 0, 0, 0 ; 0, 0, 1 }
+}
+
+NODAL_INITIAL_CONDITION( velocity ) {
+    default_values = { 0, 0, 0 }
+}
+
+NODAL_INITIAL_CONDITION( pressure ) {
+    type = nodal_values
+    nodal_values = Read( "MESH.DIR/init_pressure.nic" )
+}
+
+NODAL_INITIAL_CONDITION( field ) {
+    field = "water"
+    type = nodal_values
+    nodal_values = Read( "MESH.DIR/init_water.nic" )
+}
+
+NODAL_INITIAL_CONDITION( kinetic_energy ) {
+    default_value = 1e-06
+}
+
+NODAL_INITIAL_CONDITION( eddy_frequency ) {
+    default_value = 3.030303e-01
+}
+
+NODAL_INITIAL_CONDITION( eddy_viscosity ) {
+    default_value = 3.300000e-06
+}
+
+NODAL_OUTPUT {
+    output_frequency = 25
+}
+
+RESTART_OUTPUT {
+    output_frequency = 125
+}
+
+RUN

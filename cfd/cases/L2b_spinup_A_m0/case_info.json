@@ -1,0 +1,8 @@
+{
+ "transient": true,
+ "dt": 0.005,
+ "final_time": 10.0,
+ "nsteps": 2000,
+ "omega": 1256.6370614359173,
+ "mesh_dir": "C:\\Users\\aalsayid\\downloads\\per\\coffee-dynamics\\cfd\\mesh\\acu_A_L2_m0"
+}

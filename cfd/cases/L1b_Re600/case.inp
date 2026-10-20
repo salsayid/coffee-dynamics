@@ -1,0 +1,120 @@
+ANALYSIS {
+    title                         = "L1 Re=600"
+    type                          = transient
+}
+
+EQUATION {
+    flow                          = navier_stokes
+    turbulence                    = none
+}
+
+AUTO_SOLUTION_STRATEGY {
+    max_time_steps                = 13469
+    final_time                    = 909.47
+    initial_time_increment        = 0.0675275
+    auto_time_increment           = off
+    convergence_tolerance         = 0.0001
+    max_stagger_iterations        = 4
+}
+
+DENSITY_MODEL( "water85" ) {
+    density                       = 968.6
+}
+
+VISCOSITY_MODEL( "water85" ) {
+    viscosity                     = 0.000319638
+}
+
+MATERIAL_MODEL( "water85" ) {
+    density_model                 = "water85"
+    viscosity_model               = "water85"
+}
+
+REFERENCE_FRAME( "rotor" ) {
+    rotation_center               = { 0, 0, 0 }
+    angular_velocity              = { 0, 0, 0.7696793002915451 }
+}
+
+COORDINATE {
+    coordinates                   = Read( "MESH.DIR/mesh.crd" )
+}
+
+ELEMENT_SET( "fluid" ) {
+    elements                      = Read( "MESH.DIR/mesh.cnn" )
+    shape                         = eight_node_brick
+    material_model                = "water85"
+}
+
+SIMPLE_BOUNDARY_CONDITION( "inner" ) {
+    surfaces                      = Read( "MESH.DIR/inner.srf" )
+    shape                         = four_node_quad
+    element_set                   = "fluid"
+    type                          = wall
+    reference_frame               = "rotor"
+}
+
+SIMPLE_BOUNDARY_CONDITION( "outer" ) {
+    surfaces                      = Read( "MESH.DIR/outer.srf" )
+    shape                         = four_node_quad
+    element_set                   = "fluid"
+    type                          = wall
+}
+
+SIMPLE_BOUNDARY_CONDITION( "top" ) {
+    surfaces                      = Read( "MESH.DIR/top.srf" )
+    shape                         = four_node_quad
+    element_set                   = "fluid"
+    type                          = slip
+}
+
+SIMPLE_BOUNDARY_CONDITION( "bottom" ) {
+    surfaces                      = Read( "MESH.DIR/bottom.srf" )
+    shape                         = four_node_quad
+    element_set                   = "fluid"
+    type                          = slip
+}
+
+PERIODIC_BOUNDARY_CONDITION( "wedge" ) {
+    variable                      = all
+    type                          = axisymmetric
+    nodal_pairs                   = Read( "MESH.DIR/wedge.pbc" )
+    rotation_axis                 = { 0, 0, 0 ; 0, 0, 1 }
+}
+
+NODAL_INITIAL_CONDITION( velocity ) {
+    type                          = nodal_values
+    nodal_values                  = Read( "MESH.DIR/init_velocity.nic" )
+}
+NODAL_INITIAL_CONDITION( pressure ) {
+    default_value                 = 0
+}
+
+
+NODAL_OUTPUT {
+    output_frequency              = 336
+}
+
+RESTART_OUTPUT {
+    output_frequency              = 336
+}
+
+TIME_HISTORY_OUTPUT( "midgap" ) {
+    nodes                         = Read( "MESH.DIR/probe_midgap.nbc" )
+    output_frequency              = 33
+}
+
+SURFACE_OUTPUT( "inner" ) {
+    surfaces                      = Read( "MESH.DIR/inner.srf" )
+    shape                         = four_node_quad
+    element_set                   = "fluid"
+    integrated_output_frequency   = 1
+}
+
+SURFACE_OUTPUT( "outer" ) {
+    surfaces                      = Read( "MESH.DIR/outer.srf" )
+    shape                         = four_node_quad
+    element_set                   = "fluid"
+    integrated_output_frequency   = 1
+}
+
+RUN
